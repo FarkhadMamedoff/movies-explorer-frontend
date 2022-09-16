@@ -74,7 +74,7 @@ export default function App() {
   React.useEffect(() => {
     setMovies(moviesData);
     setIsPreloaderOpen(false);
-    setIsLoggedIn(true);
+    setIsLoggedIn(false);
 
     setIsError(false);
     setIsInfoTooltipOpen(false);
