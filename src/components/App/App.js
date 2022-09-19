@@ -60,6 +60,7 @@ export default function App() {
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isInputEnabled, setIsInputEnabled] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
 
 
@@ -71,6 +72,9 @@ export default function App() {
     setIsBurgerOpen(!isBurgerOpen);
   };
 
+  function onEditButtonClick(isInputEnabled) {
+    setIsInputEnabled(!isInputEnabled);
+  }
   React.useEffect(() => {
     setMovies(moviesData);
     setIsPreloaderOpen(false);
@@ -109,7 +113,7 @@ export default function App() {
         </Route>
         <Route exact path="/profile">
           <Header isLoggedIn={isLoggedIn} isOpen={isBurgerOpen} onMenuOpen={onBurgerClick} />
-          <Profile />
+          <Profile isEnabled={isInputEnabled} onClick={onEditButtonClick} />
         </Route>
         <Route path="*">
           <NotFound returntoPrevious={returntoPrevious} />

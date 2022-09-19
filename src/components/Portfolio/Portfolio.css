@@ -22,29 +22,36 @@
 }
 
 .portfolio__links {
+  list-style: none;
+  padding: 0;
   margin: 50px 70px 125px;
   display: flex;
   flex-direction: column;
 }
 
-.portfolio__link {
+.portfolio__link-container {
+  display: block;
   margin: 0 0 20px;
-  text-decoration: none;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
   border-bottom: 1px solid #424242;
   padding: 0 0 19px;
   transition: 0.4s linear;
 }
 
-.portfolio__link:last-of-type {
+.portfolio__link-container:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.portfolio__link-container:last-of-type {
   margin-bottom: 0;
   border: none;
 }
 
-.portfolio__link:hover {
-  opacity: 0.7;
-  cursor: pointer;
+.portfolio__link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 .portfolio__link-title {
@@ -75,6 +82,9 @@
     margin: 50px 50px 90px;
   }
 
+  .portfolio__link-container {
+    border-color: #E6E6E6;
+  }
 
   .portfolio__link-title {
     font-size: 28px;

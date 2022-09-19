@@ -71,6 +71,9 @@
   text-align: end;
 }
 
+.profile__input:focus {
+  outline: #4285F4 solid 2px;
+}
 
 .profile__button {
   display: block;

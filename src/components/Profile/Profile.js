@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 
-export default function Profile() {
+export default function Profile(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(props.isEnabled)
+    props.onClick(props.isEnabled);
   }
 
   return (
@@ -22,7 +24,7 @@ export default function Profile() {
               value={'Фархад'}
               minLength="2"
               maxLength="30"
-              disabled/>
+              disabled={!props.isEnabled}/>
           </label>
           <label className="profile__label">
             <p className="profile__caption">E-mail</p>
@@ -33,7 +35,7 @@ export default function Profile() {
               value={'adareem@gmail.com'}
               minLength="2"
               maxLength="30"
-              disabled />
+              disabled={!props.isEnabled} />
           </label>
         </div>
         <button type="submit" className="profile__button">Редактировать</button>
