@@ -1,0 +1,164 @@
+.about-me {
+  background-color: #202020;
+  width: 100%;
+  margin: 0;
+}
+
+.about-me__block {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.about-me__nav-bar-container {
+  margin: 110px 70px 0;
+}
+
+.about-me__info {
+  margin: 66px 70px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-me__bio {
+  margin: 0;
+  max-width: 600px;
+}
+
+.about-me__name {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
+.about-me__job {
+  margin: 18px 0 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFFFFF;
+
+}
+
+.about-me__description {
+  margin: 26px 0 99px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+
+.about-me__link {
+  margin: 0;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  transition: 0.4s linear;
+}
+
+.about-me__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.about-me__avatar {
+  width: 270px;
+  border-radius: 10px;
+  object-position: center;
+  object-fit: cover;
+  margin: 0 0 0 49px;
+}
+
+@media screen and (max-width: 800px) {
+  .about-me__nav-bar-container {
+    margin: 90px 50px 0;
+  }
+
+  .about-me__info {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .about-me__bio {
+    max-width: 364px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__job {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__description {
+    margin-top: 20px;
+    margin-bottom: 87px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__avatar {
+    width: 255px;
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+  .about-me__info {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .about-me__avatar {
+    width: 292px;
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-me__nav-bar-container {
+    margin: 70px 14px 0;
+  }
+
+  .about-me__info {
+    margin: 60px 14px 0;
+  }
+
+  .about-me__bio {
+    max-width: 292px;
+  }
+
+  .about-me__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .about-me__job {
+    margin-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__description {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

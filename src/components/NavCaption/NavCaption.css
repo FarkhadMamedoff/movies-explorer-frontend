@@ -1,0 +1,19 @@
+.nav-caption {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  border-bottom: 1px solid #dadada;
+  padding: 0 0 22px;
+  width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+  .nav-caption {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

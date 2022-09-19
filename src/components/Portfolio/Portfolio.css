@@ -1,0 +1,130 @@
+.portfolio {
+  background-color: #202020;
+  width: 100%;
+  margin: 0;
+}
+
+.portfolio__block {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.portfolio__title {
+  margin: 100px 70px 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #8B8B8B;
+}
+
+.portfolio__links {
+  list-style: none;
+  padding: 0;
+  margin: 50px 70px 125px;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio__link-container {
+  display: block;
+  margin: 0 0 20px;
+  width: 100%;
+  border-bottom: 1px solid #424242;
+  padding: 0 0 19px;
+  transition: 0.4s linear;
+}
+
+.portfolio__link-container:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.portfolio__link-container:last-of-type {
+  margin-bottom: 0;
+  border: none;
+}
+
+.portfolio__link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio__link-title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
+.portfolio__link-arrow {
+  width: 29px;
+  margin: 0;
+  background-image: url(../../images/arrow.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 800px) {
+  .portfolio__title {
+    margin: 90px 50px 0;
+  }
+
+  .portfolio__links {
+    margin: 50px 50px 90px;
+  }
+
+  .portfolio__link-container {
+    border-color: #E6E6E6;
+  }
+
+  .portfolio__link-title {
+    font-size: 28px;
+  }
+
+  .portfolio__link-arrow {
+    width: 27px;
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+  .about-me__info {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .about-me__avatar {
+    width: 292px;
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .portfolio__title {
+    margin: 70px 14px 0;
+    font-size: 14px;
+  }
+
+  .portfolio__links {
+    margin: 40px 14px 70px;
+  }
+
+  .portfolio__link-title {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__link-arrow {
+    width: 18px;
+  }
+}

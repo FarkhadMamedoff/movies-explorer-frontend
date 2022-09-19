@@ -1,0 +1,176 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0 70px 0 0;
+}
+
+.navigation__background {
+  position: relative;
+}
+
+.navigation__block {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  transition: 0.4s linear;
+}
+
+.navigation__link {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+  margin: 0;
+  transition: 0.4s linear;
+}
+
+.navigation__link_state_logged {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.navigation__link_type_saved-films {
+  margin-left: 16px;
+}
+
+.navigation__link_type_main {
+  display: none;
+}
+
+.navigation__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.navigation__link_type_sign-in {
+  color: black;
+  margin: 0 0 0 30px;
+  padding: 8px 20px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+}
+
+.navigation__link_type_account {
+  margin: 0 0 0 30vw;
+  padding: 6px 12px;
+  border: 2px solid #AAAAAA;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 50px;
+}
+
+.navigation__link_type_account::before {
+  display: inline-block;
+  content: '';
+  margin: 0 7px 0 0;
+  align-self: center;
+  width: 12px;
+  height: 14px;
+  background-image: url(../../images/profile-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.navigation__link-container {
+  margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .navigation {
+    margin-right: 30px;
+  }
+
+  .navigation__link_type_main {
+    display: block;
+  }
+
+  .navigation__link_type_active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #FFFFFF;
+  }
+
+  .navigation__background_state_opened {
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+    justify-content: flex-end;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    transition: 0.4s linear;
+  }
+
+  .navigation__block_state_logged-in {
+    position: fixed;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    height: 100vh;
+    width: 520px;
+    background-color: #202020;
+    z-index: 3;
+  }
+
+  .navigation__block_state_closed {
+    visibility: hidden;
+    transform: translateX(100%);
+  }
+
+  .navigation__block_state_opened {
+    visibility: visible;
+    transform: translateX(0%);
+  }
+
+  .navigation__link-container {
+    margin-bottom: 28px;
+  }
+
+  .navigation__link_state_logged {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .navigation__link-container:first-of-type {
+    margin-top: 159px;
+  }
+
+  .navigation__link-container:last-of-type {
+    margin: auto 0 90px 0;
+  }
+
+  .navigation__link_type_account {
+      margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navigation {
+    margin-right: 14px;
+  }
+
+  .navigation__block_state_logged-in {
+    width: 100%;
+  }
+
+  .navigation__link-container {
+    margin-bottom: 24px;
+  }
+
+  .navigation__link-container:first-of-type {
+    margin-top: 144px;
+  }
+
+  .navigation__link-container:last-of-type {
+    margin-top: auto;
+    margin-bottom: 46px;
+  }
+}

@@ -1,0 +1,127 @@
+.techs {
+  background-color: #272727;
+  width: 100%;
+  margin: 0;
+}
+
+.techs__block {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.techs__nav-bar-container {
+  margin: 100px 70px 0;
+}
+
+.techs__text {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
+.techs__text_type_title {
+  margin: 90px 0 0;
+  font-size: 50px;
+  line-height: 58px;
+}
+
+.techs__text_type_subtitle {
+  margin: 26px 0 0;
+  max-width: 460px;
+  font-size: 14px;
+  line-height: 20px;
+  align-self: center;
+}
+
+.techs__technologies {
+  margin: 100px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 90px);
+  max-width: 700px;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  align-self: center;
+}
+
+.techs__technology {
+  margin: 0;
+  padding: 21px 0 22px;
+  background-color: #303030;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
+.techs__technology:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .techs__nav-bar-container {
+    margin: 90px 50px 0;
+  }
+
+  .techs__text_type_title {
+    margin-top: 80px;
+  }
+
+  .techs__text_type_subtitle {
+    margin-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .techs__technologies {
+    margin-top: 83px;
+    margin-bottom: 90px;
+    max-width: calc(100% - 120px);
+    grid-template-columns: repeat(auto-fill, 84px);
+  }
+
+  .techs__technology {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs {
+    background-color: #202020;
+  }
+
+  .techs__nav-bar-container {
+    margin: 70px 18px 0;
+  }
+
+  .techs__text_type_title {
+    margin-top: 60px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .techs__text_type_subtitle {
+    margin-top: 24px;
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 292px;
+  }
+
+  .techs__technologies {
+    margin-top: 50px;
+    margin-bottom: 70px;
+    max-width: calc(100% - 141px);
+  }
+}
