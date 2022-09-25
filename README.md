@@ -5,9 +5,9 @@ MOVIES-EXPLORER-FRONEND
 
 Репозиторий для фронтенд части приложения проекта `Movies`, 
 
-Макет: https://drive.google.com/file/d/1mmt_WQbYw4Y-khwq3swHES_nltXLfgxO/view?usp=sharing
-Фронтенд: https://movies.mfg.nomoredomains.sbs/
-Сслыка на pull request: 
+Макет: https://drive.google.com/file/d/1mmt_WQbYw4Y-khwq3swHES_nltXLfgxO/view?usp=sharing   
+Фронтенд: https://movies.mfg.nomoredomains.sbs/  
+Ссылка на pull request: https://github.com/FarkhadMamedoff/movies-explorer-frontend/pull/2  
 
 ## Технологии
 ### Верстка
