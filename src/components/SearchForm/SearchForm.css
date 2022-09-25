@@ -32,10 +32,6 @@
   width: 100%;
 }
 
-.search-form__input:-webkit-autofill {
-  background-color: transparent;
-}
-
 .search-form__input::placeholder {
   font-size: 13px;
   line-height: 17px;

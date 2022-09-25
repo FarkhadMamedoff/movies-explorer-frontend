@@ -1,7 +1,7 @@
 import './NavCaption.css';
 
-export default function NavCaption(props) {
+export default function NavCaption({ title }) {
   return (
-    <h2 className="nav-caption">{props.title}</h2>
+    <h2 className="nav-caption">{title}</h2>
   );
 }

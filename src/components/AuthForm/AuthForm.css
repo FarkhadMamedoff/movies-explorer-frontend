@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
 }
 
 .auth-form__title {
@@ -87,7 +88,7 @@
   margin: 0;
   position: absolute;
   left: 0;
-  top: 100%;
+  top: 102%;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;

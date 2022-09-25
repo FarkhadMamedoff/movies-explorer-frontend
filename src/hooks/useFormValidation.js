@@ -1,4 +1,5 @@
 import React from 'react';
+import { customNameMessage, customEmailMessage } from '../utils/constants';
 
 export default function useFormValidation() {
   const baseObject = {
@@ -11,25 +12,38 @@ export default function useFormValidation() {
   const [isValid, setIsValid] = React.useState(false);
 
   const handleChange = (e) => {
-    setValues(baseObject);
-    setErrors(baseObject);
-    setIsValid(false);
     const input = e.target;
     const form = input.closest('form');
-    const nextValuesState = {
+
+    if (input.validity.patternMismatch && input.name !== 'password') {
+      if (input.name === 'name') {
+        input.setCustomValidity(customNameMessage);
+      } else if (input.name === 'email') {
+        input.setCustomValidity(customEmailMessage);
+      }
+    } else {
+      input.setCustomValidity('');
+    }
+
+    setErrors({
+      ...errors,
+      [input.name]: input.validationMessage,
+    });
+    setValues({
       ...values,
       [input.name]: input.value,
-    };
-    if (input.validationMessage !== '') {
-      const nextErrorsState = {
-        ...errors,
-        [input.name]: input.validationMessage,
-      };
-      setErrors(nextErrorsState);
-    }
-    setValues(nextValuesState);
+    });
     setIsValid(form.checkValidity());
   };
 
-  return { values, handleChange, errors, isValid };
+  const resetForm = React.useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
+
+  return { values, handleChange, errors, resetForm, isValid };
 }
