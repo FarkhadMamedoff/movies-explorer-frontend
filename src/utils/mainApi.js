@@ -60,6 +60,14 @@ class MainApi {
       .then((res) => { return this._getResult(res) });
   }
 
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+    }).then(res => this._getResult(res));
+  }
+
   login(object) {
     return this._setData('/signin', 'POST', object, true);
   }

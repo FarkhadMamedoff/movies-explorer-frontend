@@ -22,10 +22,11 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
   const [allMovies, setAllMovies] = React.useState([]);
   const [moviesToShow, setMoviesToShow] = React.useState([]);
   const [cutMoviesToShow, setCutMoviesToShow] = React.useState([]);
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [isEmpty, setIsEmpty] = React.useState(true);
   const [moviesToShowCount, setMoviesToShowCount] = React.useState({ moviesCount: 12, moreCount: 3 });
 
-  const { findMovies, convertMoviesImages } = useMovies();
+  const { findMovies, getShortMovies, convertMoviesImages } = useMovies();
   const screenWidth = useDeviceScreenWidth();
 
   const isSavedMovies = location.pathname === '/saved-movies';
@@ -33,20 +34,31 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
   const hasMovies = cutMoviesToShow.length >= 5 && cutMoviesToShow.length < moviesToShow.length;
 
   React.useEffect(() => {
-    const savedQuery = localStorage.getItem(isSavedMovies ? 'savedQuery' : 'query');
-    const savedFindShotMovies = localStorage.getItem(isSavedMovies ? 'savedfindShortMovies' : 'findShortMovies');
+    const savedQuery = localStorage.getItem('query');
+    const savedFindShortMovies = localStorage.getItem(isSavedMovies ? 'savedfindShortMovies' : 'findShortMovies');
     const savedLocalMovies = JSON.parse(localStorage.getItem('moviesToShow'));
-    if (savedLocalMovies) {
-      setMoviesToShow(savedLocalMovies);
+    const savedAllMovies = JSON.parse(localStorage.getItem('allMovies'));
+    if (!isSavedMovies) {
+      if (savedAllMovies) {
+        setAllMovies(savedAllMovies);
+      }
+      if (savedLocalMovies) {
+        setMoviesToShow(savedLocalMovies);
+        setIsEmpty(false);
+      }
+      setFindQuery(savedQuery);
+    } else {
+      setMoviesToShow(savedMovies);
       setIsEmpty(false);
     }
-    setFindQuery(savedQuery);
-    if (savedFindShotMovies === 'true') {
+    if (savedFindShortMovies === 'true') {
       setIsSearchShortFilms(true);
+      setIsSearch(true);
     } else {
       setIsSearchShortFilms(false);
+      setIsSearch(false);
     }
-  }, [isSavedMovies]);
+  }, [isSavedMovies, savedMovies]);
 
   React.useEffect(() => {
     if (!isSavedMovies) {
@@ -60,13 +72,19 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
     }
   }, [screenWidth, location.pathname, isSavedMovies]);
 
+  React.useEffect(() => {
+    setFilteredMovies(
+      isSearchShortFilms ? getShortMovies(moviesToShow) : moviesToShow
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSavedMovies, isSearchShortFilms, moviesToShow]);
 
   React.useEffect(() => {
-    if (moviesToShow.length) {
-      const res = moviesToShow.filter((item, i) => i < moviesToShowCount.moviesCount);
+    if (filteredMovies.length) {
+      const res = filteredMovies.filter((item, i) => i < moviesToShowCount.moviesCount);
       setCutMoviesToShow(res);
     }
-  }, [moviesToShow, moviesToShowCount.moviesCount]);
+  }, [filteredMovies, moviesToShowCount.moviesCount]);
 
   React.useEffect(() => {
     if (isSavedMovies) {
@@ -80,6 +98,13 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
 
   function handleSerchShortFilms(isSearchShortFilms) {
     setIsSearchShortFilms(!isSearchShortFilms);
+    setIsSearch(true);
+    if (!isSearchShortFilms) {
+      setFilteredMovies(getShortMovies(moviesToShow));
+    } else {
+      setFilteredMovies(moviesToShow);
+    }
+    localStorage.setItem(isSavedMovies ? 'savedfindShortMovies' : 'findShortMovies', !isSearchShortFilms);
   }
 
   function search(movies, query, searchShorts) {
@@ -90,6 +115,9 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
     } else {
       setIsNotFound(false);
       setMoviesToShow(foundMovies);
+      setFilteredMovies(
+        searchShorts ? getShortMovies(foundMovies) : foundMovies
+      );
     }
     if (!isSavedMovies) {
       localStorage.setItem('moviesToShow', JSON.stringify(foundMovies));
@@ -98,13 +126,16 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
 
 
   function handleSearch(newQuery) {
-    localStorage.setItem(isSavedMovies ? 'savedQuery' : 'query', newQuery);
+    if (!isSavedMovies) {
+      localStorage.setItem('query', newQuery);
+    }
     localStorage.setItem(isSavedMovies ? 'savedfindShortMovies' : 'findShortMovies', isSearchShortFilms);
     onRunPreloader(true);
     if (allMovies.length === 0) {
       MoviesApi.getInitialMovies()
         .then(movies => {
           setAllMovies(convertMoviesImages(movies));
+          localStorage.setItem('allMovies', JSON.stringify(movies));
           search(movies, newQuery, isSearchShortFilms);
         })
         .catch(() => {
@@ -119,8 +150,8 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
 
   function handleClick() {
     const end = cutMoviesToShow.length + moviesToShowCount.moreCount;
-    if (moviesToShow.length - cutMoviesToShow.length > 0) {
-      const newMovies = moviesToShow.slice(cutMoviesToShow.length, end);
+    if (filteredMovies.length - cutMoviesToShow.length > 0) {
+      const newMovies = filteredMovies.slice(cutMoviesToShow.length, end);
       setCutMoviesToShow([...cutMoviesToShow, ...newMovies]);
     }
   }
@@ -136,7 +167,7 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
             defaultQuery={findQuery} />
         </div>
         {!isEmpty ? (!isNotFound ?
-          <MoviesCardList movies={isSavedMovies ? !isSearch ? savedMovies : moviesToShow : cutMoviesToShow}
+          <MoviesCardList movies={isSavedMovies ? !isSearch ? allMovies : filteredMovies : cutMoviesToShow}
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
             savedMovies={savedMovies} />

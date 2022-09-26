@@ -38,7 +38,7 @@ export default function Navigation({ isLoggedIn, isOpen, onMenuOpen }) {
                 </NavLink>
               </li>
               <li className="navigation__link-container">
-                <NavLink exact to="/profile" className="navigation__link navigation__link_type_account" activeClassName="navigation__link_type_active">
+                <NavLink exact to="/profile" className="navigation__link navigation__link_type_account" activeClassName="navigation__link_type_account-active">
                   Аккаунт
                 </NavLink>
               </li>

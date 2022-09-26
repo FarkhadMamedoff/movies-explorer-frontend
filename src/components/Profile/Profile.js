@@ -7,7 +7,7 @@ import { namePattern, emailPattern } from '../../utils/constants';
 export default function Profile({ onSignOut, onUpdate }) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, resetForm, isValid } = useFormValidation();
-  const isDataValid = isValid && (currentUser.name !== values.name && currentUser.email !== values.email);
+  const isDataValid = isValid && (currentUser.name !== values.name || currentUser.email !== values.email);
 
   function handleSubmit(e) {
     e.preventDefault();

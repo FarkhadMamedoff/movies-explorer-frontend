@@ -87,7 +87,7 @@
   background-size: 7px 7px;
 }
 
-.movies-card__container:hover .movies-card__button_type_remove {
+.movies-card:hover .movies-card__button_type_remove {
   background-image: url(../../images/icon-remove.svg);
 }
 
@@ -138,5 +138,9 @@
   .movies-card__duration {
     font-size: 10px;
     line-height: 12px;
+  }
+
+  .movies-card__button_type_remove {
+    background-image: url(../../images/icon-remove.svg);
   }
 }

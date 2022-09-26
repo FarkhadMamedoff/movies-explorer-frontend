@@ -1,6 +1,6 @@
 const emailPattern = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$';
 const namePattern = '^[A-Za-zА-Яа-яЁё /s -]+$';
-
+const urlPattern = new RegExp('(https?:\\/\\/)[a-zA-Z.:0-9-?]{2,}\\.[a-z]{2,}([-a-zA-Z0-9@:%_+.~#?&=/]*)');
 const BASE_URL = 'https://api.movies.mfg.nomoredomains.sbs';
 const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
@@ -28,6 +28,7 @@ const mobileMoviesCountsProperties = {
 export {
   namePattern,
   emailPattern,
+  urlPattern,
   BASE_URL,
   MOVIES_URL,
   customNameMessage,

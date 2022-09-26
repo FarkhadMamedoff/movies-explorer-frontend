@@ -16,8 +16,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useCloseByOverlayAndEsc from '../../hooks/useCloseByOverlayAndEsc';
 import MainApi from '../../utils/mainApi';
+import { useLocation } from 'react-router-dom';
 
 export default function App() {
+  const location = useLocation();
   const history = useHistory();
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
@@ -32,27 +34,24 @@ export default function App() {
 
   useCloseByOverlayAndEsc(onBurgerClick, closeInfoTooltip, isInfoTooltipOpen, isBurgerOpen);
 
-  const checkToken = React.useCallback(() => {
+
+  React.useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
+      setIsPreloaderOpen(true);
       MainApi.checkToken(token)
         .then((res) => {
           setCurrentUser(res);
           setIsLoggedIn(true);
+          history.push(location.pathname);
         })
         .catch((err) => {
           openInfoTooltip(true, err);
-        });
-    } else {
-      return;
+        })
+        .finally(() => setIsPreloaderOpen(false));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  React.useEffect(() => {
-    if (!isLoggedIn) {
-      checkToken()
-    }
-  }, [checkToken, isLoggedIn]);
 
   React.useEffect(() => {
     if (isLoggedIn) {
@@ -90,6 +89,22 @@ export default function App() {
     setIsPreloaderOpen(state);
   }
 
+  function checkToken() {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      MainApi.checkToken(token)
+        .then((res) => {
+          setCurrentUser(res);
+          setIsLoggedIn(true);
+          history.push('/movies');
+        })
+        .catch((err) => {
+          openInfoTooltip(true, err);
+        });
+    } else {
+      return;
+    }
+  }
   function handleLogin(info) {
     setIsPreloaderOpen(true);
     setIsRegFormError(false);
@@ -97,7 +112,6 @@ export default function App() {
       .then((res) => {
         localStorage.setItem('jwt', res.token);
         checkToken();
-        history.push('/movies');
         openInfoTooltip(false, 'Рады видеть!');
         setIsLogFormError(false);
       })
@@ -217,6 +231,7 @@ export default function App() {
           </Route>
           <ProtectedRoute
             exact path="/movies"
+            isLoggedIn={isLoggedIn}
             component={Movies}
             savedMovies={savedMovies}
             onMovieLike={handleSaveMovie}
@@ -226,6 +241,7 @@ export default function App() {
           />
           <ProtectedRoute
             exact path="/saved-movies"
+            isLoggedIn={isLoggedIn}
             component={SavedMovies}
             savedMovies={savedMovies}
             onMovieDelete={handleDeleteMovie}
@@ -234,6 +250,7 @@ export default function App() {
           />
           <ProtectedRoute
             exact path="/profile"
+            isLoggedIn={isLoggedIn}
             component={Profile}
             onSignOut={handleSignOut}
             onUpdate={handleUpdateUserInfo}

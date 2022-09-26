@@ -1,4 +1,11 @@
+import { urlPattern } from "../utils/constants";
+
 export default function useMovies() {
+
+  function getShortMovies(movies) {
+    return movies.filter((movie) => movie.duration < 40);
+  }
+
   function findMovies(movies, findQuery, findShortMovies) {
     const res = movies.filter((movie) => {
       const nameRu = String(movie.nameRU).toLowerCase().trim();
@@ -8,7 +15,7 @@ export default function useMovies() {
     });
 
     if (findShortMovies) {
-      return res.filter((movie) => movie.duration < 40);
+      return getShortMovies(res);/*res.filter((movie) => movie.duration < 40);*/
     } else {
       return res;
     }
@@ -39,9 +46,19 @@ export default function useMovies() {
     movies.forEach(movie => {
       movie.thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`;
       movie.image = `https://api.nomoreparties.co${movie.image.url}`;
+
+      if (!movie.country) {
+        movie.country = 'None';
+      }
+      if (!movie.nameEN) {
+        movie.nameEN = 'None';
+      }
+      if (!urlPattern.test(movie.trailerLink)) {
+        movie.trailerLink = 'https://youtube.com';
+      }
     });
     return movies;
   }
 
-  return { findMovies, convertDuration, isMovieSaved, convertMoviesImages };
+  return { findMovies, getShortMovies, convertDuration, isMovieSaved, convertMoviesImages };
 }
