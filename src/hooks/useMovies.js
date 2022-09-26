@@ -6,19 +6,14 @@ export default function useMovies() {
     return movies.filter((movie) => movie.duration < 40);
   }
 
-  function findMovies(movies, findQuery, findShortMovies) {
+  function findMovies(movies, findQuery) {
     const res = movies.filter((movie) => {
       const nameRu = String(movie.nameRU).toLowerCase().trim();
       const nameEn = String(movie.nameEN).toLowerCase().trim();
       const query = findQuery.toLowerCase().trim();
       return nameRu.indexOf(query) !== -1 || nameEn.indexOf(query) !== -1;
     });
-
-    if (findShortMovies) {
-      return getShortMovies(res);/*res.filter((movie) => movie.duration < 40);*/
-    } else {
       return res;
-    }
   }
 
   function convertDuration(totalMinutes) {
