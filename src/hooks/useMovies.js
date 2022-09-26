@@ -13,7 +13,7 @@ export default function useMovies() {
       const query = findQuery.toLowerCase().trim();
       return nameRu.indexOf(query) !== -1 || nameEn.indexOf(query) !== -1;
     });
-      return res;
+    return res;
   }
 
   function convertDuration(totalMinutes) {
