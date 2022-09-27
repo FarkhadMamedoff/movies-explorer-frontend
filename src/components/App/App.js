@@ -106,6 +106,7 @@ export default function App() {
       return;
     }
   }
+
   function handleLogin(info) {
     setIsPreloaderOpen(true);
     setIsRegFormError(false);
