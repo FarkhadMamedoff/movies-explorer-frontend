@@ -1,11 +1,11 @@
 import Movies from '../Movies/Movies';
 
-export default function SavedMovies(props) {
-  const currentUserId = 1;
-  const savedMovies = props.movies.filter(card => {
-    return (card.owner === currentUserId);
-  });
+export default function SavedMovies({ savedMovies, onMovieDelete, onOpenTooltip, onRunPreloader }) {
   return (
-    <Movies movies={savedMovies} />
+    <Movies
+      savedMovies={savedMovies}
+      onMovieDelete={onMovieDelete}
+      onOpenTooltip={onOpenTooltip}
+      onRunPreloader={onRunPreloader} />
   )
 }

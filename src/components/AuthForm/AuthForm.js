@@ -1,20 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import Error from '../Error/Error';
 import './AuthForm.css';
 import { useLocation } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation';
+import { namePattern, emailPattern } from '../../utils/constants';
 
-export default function AuthForm() {
+export default function AuthForm({ onSubmit, isError, errorMessage }) {
   const location = useLocation();
   const isSignedIn = location.pathname === '/sign-in';
   const authFormText = isSignedIn ? 'Еще не зарегистрированы?' : 'Уже зарегистированы?';
-  const tipText = isSignedIn ? 'Войти' : 'Регистрация';
-  const {values, handleChange, errors, isValid} = useFormValidation();
+  const tipText = !isSignedIn ? 'Войти' : 'Регистрация';
+  const { values, handleChange, errors, resetForm, isValid } = useFormValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+    const data = isSignedIn
+      ? {
+        password: values.password,
+        email: values.email
+      } : {
+        name: values.name,
+        password: values.password,
+        email: values.email
+      };
+    onSubmit(data);
   }
+
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <section className="auth">
@@ -33,7 +49,8 @@ export default function AuthForm() {
               minLength="2"
               maxLength="30"
               value={values.name || ''}
-              onChange={handleChange} />
+              onChange={handleChange}
+              pattern={namePattern} />
             <span className={`auth-form__input-error ${errors.name && 'auth-form__input-error_state_active'}`}>{errors.name || ''}</span>
           </label>}
           <label className="auth-form__label">
@@ -45,7 +62,8 @@ export default function AuthForm() {
               minLength="2"
               maxLength="30"
               value={values.email || ''}
-              onChange={handleChange} />
+              onChange={handleChange}
+              pattern={emailPattern} />
             <span className={`auth-form__input-error ${errors.email && 'auth-form__input-error_state_active'}`}>{errors.email || ''}</span>
           </label>
           <label className="auth-form__label">
@@ -61,6 +79,7 @@ export default function AuthForm() {
             <span className={`auth-form__input-error ${errors.password && 'auth-form__input-error_state_active'}`}>{errors.password || ''}</span>
           </label>
         </div>
+        <Error isError={isError} errorMessage={errorMessage} />
         <button type="submit" className={`auth-form__button ${!isValid && 'auth-form__button_state_deactivated'}`} disabled={!isValid}>{isSignedIn ? 'Войти' : 'Зарегистрироваться'}</button>
         <p className="auth-form__text">{authFormText} <Link to={isSignedIn ? "/sign-up" : "/sign-in"} className="auth-form__link">{tipText}</Link></p>
       </form>
