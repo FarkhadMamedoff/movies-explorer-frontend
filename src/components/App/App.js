@@ -47,6 +47,7 @@ export default function App() {
         })
         .catch((err) => {
           openInfoTooltip(true, err);
+          handleSignOut();
         })
         .finally(() => setIsPreloaderOpen(false));
     }
@@ -161,6 +162,7 @@ export default function App() {
     window.localStorage.clear();
     history.push('/');
     setCurrentUser({});
+    setSavedMovies([]);
     setIsLoggedIn(false);
   }
 
