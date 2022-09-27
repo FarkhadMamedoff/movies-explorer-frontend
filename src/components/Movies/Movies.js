@@ -31,7 +31,7 @@ export default function Movies({ savedMovies, onMovieLike, onMovieDelete, onOpen
 
   const isSavedMovies = location.pathname === '/saved-movies';
 
-  const hasMovies = cutMoviesToShow.length >= 7 && cutMoviesToShow.length < moviesToShow.length;
+  const hasMovies = cutMoviesToShow.length >= 5 && cutMoviesToShow.length < filteredMovies.length;
 
   React.useEffect(() => {
     const savedQuery = localStorage.getItem('query');
